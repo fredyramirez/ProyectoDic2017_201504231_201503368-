@@ -1,0 +1,3 @@
+digraph lista{ 
+node [shape = record, style=filled];splines=line; 
+}
