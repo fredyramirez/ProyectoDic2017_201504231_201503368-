@@ -74,12 +74,18 @@ public class WService {
         String respuesta = getString("reporteArtista",request);
         System.err.println(respuesta);
     }
-    public static void reporteAlbumes(String genero , String year , String artista){
+    public static void reporteAlbumes(String genero , String anio , String artista){
         RequestBody request = new FormEncodingBuilder()
                 .add("genero",genero)
-                .add("anio", year)
+                .add("anio", anio)
                 .add("artista", artista).build();
-        String respuesta = getString("",request);
+        String respuesta = getString("reporteAlbumesEspecifico",request);
+        System.err.println(respuesta);
+    }
+     public static void reporteColaUsuario(){
+        RequestBody request = new FormEncodingBuilder()
+                .add("artista", "asdf").build();
+        String respuesta = getString("reporteAlbumesEspecifico",request);
         System.err.println(respuesta);
     }
     public static void reportelistaCanciones(String genero , String year , String artista, String album){

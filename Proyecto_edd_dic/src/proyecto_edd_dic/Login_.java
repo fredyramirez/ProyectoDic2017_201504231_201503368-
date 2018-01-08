@@ -64,7 +64,7 @@ public class Login_ extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Spomusic");
 
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\jose_\\Desktop\\Estructuras de datos - python\\music.png")); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\jose_\\Desktop\\Proyecto Estructuras DIC 2017\\ProyectoDic2017_201504231_201503368-\\Proyecto_edd_dic\\img\\spomusic.png")); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -146,7 +146,7 @@ public class Login_ extends javax.swing.JFrame {
         }else{
             String f  = WService.login(nombre, pass);
             if(WService.login(nombre, pass).equals("True")){
-                Usuario usr = new Usuario();
+                Usuario usr = new Usuario(nombre);
                 usr.setVisible(true);
                 this.setVisible(false);
             }
