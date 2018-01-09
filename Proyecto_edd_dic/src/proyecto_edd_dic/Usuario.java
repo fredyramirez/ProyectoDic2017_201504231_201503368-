@@ -26,45 +26,47 @@ public class Usuario extends javax.swing.JFrame {
      */
     private BasicPlayer player = new BasicPlayer();
     reproductor walkman = new reproductor();
-    
-    public ArrayList<item> listaItem= new ArrayList<item>(); 
-    public String[] listaArtista ;
-    public String[] listaAlbum ;
+
+    public ArrayList<item> listaItem = new ArrayList<item>();
+    public String[] listaArtista;
+    public String[] listaAlbum;
     public String[] listaGenero;
-    
+    String[] path;
+
     //datos estaticos 
-    
-   
     public Usuario(String usuario) {
-       initComponents();
-       String[] cadena;
-        do {            
-             cadena= WService.getRegistro().split("~");
-             //nombre , artista, album, genero , anio
-            item newItem = new item(cadena[0],cadena[1],cadena[2],cadena[3],cadena[4]);
+        initComponents();
+        String[] cadena;
+
+        do {
+            cadena = WService.getRegistro().split("~");
+            //nombre , artista, album, genero , anio ,path
+            item newItem = new item(cadena[0], cadena[1], cadena[2], cadena[3], cadena[4], cadena[5]);
             listaItem.add(newItem);
         } while (!cadena[0].equals("None"));
         lblUsuario.setText(usuario);
         mostrar();
-      
+
     }
-    public void mostrar(){
-        String matris[][]= new String[listaItem.size()][5];
+
+    public void mostrar() {
+        String matris[][] = new String[listaItem.size()][5];
+        path = new String[listaItem.size()];
         for (int i = 0; i < listaItem.size(); i++) {
-            matris[i][0]= listaItem.get(i).getNombreCancion();
-            matris[i][1]= listaItem.get(i).getArtista();
-            matris[i][2]= listaItem.get(i).getAlbum();
-            matris[i][3]= listaItem.get(i).getGenero();
-            matris[i][4]= listaItem.get(i).getAnio();
+            matris[i][0] = listaItem.get(i).getNombreCancion();
+            matris[i][1] = listaItem.get(i).getArtista();
+            matris[i][2] = listaItem.get(i).getAlbum();
+            matris[i][3] = listaItem.get(i).getGenero();
+            matris[i][4] = listaItem.get(i).getAnio();
+            path[i] = listaItem.get(i).getPath();
             // genero 
             // anio
         }
         tablaItems.setModel(new javax.swing.table.DefaultTableModel(
-        matris,new String[]{
-        "Titulo Cancion","Artista" ,"album","Genero","Year"
-        }));
+                matris, new String[]{
+                    "Titulo Cancion", "Artista", "Album", "Genero", "Anio"
+                }));
     }
-   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -363,6 +365,7 @@ public class Usuario extends javax.swing.JFrame {
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto_edd_dic/sub_blue_next-64.png"))); // NOI18N
 
         txtAn.setFont(new java.awt.Font("Century Gothic", 0, 36)); // NOI18N
+        txtAn.setText("2003");
         txtAn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtAnActionPerformed(evt);
@@ -370,6 +373,7 @@ public class Usuario extends javax.swing.JFrame {
         });
 
         txtGener.setFont(new java.awt.Font("Century Gothic", 0, 36)); // NOI18N
+        txtGener.setText("rap");
         txtGener.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtGenerActionPerformed(evt);
@@ -377,6 +381,7 @@ public class Usuario extends javax.swing.JFrame {
         });
 
         txtAl.setFont(new java.awt.Font("Century Gothic", 0, 36)); // NOI18N
+        txtAl.setText("tragic kingdom");
         txtAl.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtAlActionPerformed(evt);
@@ -400,6 +405,7 @@ public class Usuario extends javax.swing.JFrame {
         jLabel21.setText("Genero");
 
         txtArtista.setFont(new java.awt.Font("Century Gothic", 0, 36)); // NOI18N
+        txtArtista.setText("no doubt");
         txtArtista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtArtistaActionPerformed(evt);
@@ -478,8 +484,8 @@ public class Usuario extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addGap(37, 37, 37)
-                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1059, 1059, 1059))
+                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1074, 1074, 1074))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -572,7 +578,7 @@ public class Usuario extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setVisible(false);
         Login_ lo = new Login_();
-        
+
         lo.setVisible(true);
     }//GEN-LAST:event_jLabel17MouseClicked
 
@@ -585,11 +591,12 @@ public class Usuario extends javax.swing.JFrame {
         // TODO add your handling code here:
         WService.reporteColaUsuario();
         
+
     }//GEN-LAST:event_jLabel13MouseClicked
 
     private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
         // TODO add your handling code here:
-        WService.reporteArtistas(txtGener.getText(),txtAn.getText());
+        WService.reporteArtistas(txtGener.getText(), txtAn.getText());
     }//GEN-LAST:event_jLabel15MouseClicked
 
     private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
@@ -630,15 +637,18 @@ public class Usuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         // TODO add your handling code here:
-         
-        
+        // TODO add your handling code here:
+        int linea = tablaItems.getSelectedRow();
+        String p = path[linea].toString().replace("\\", "/");
+
         try {
-            walkman.AbrirFichero("C:/Users/jose_/Music/Mi Segunda Vida.mp3");
-            if (walkman.player.getStatus() == 1)
-            walkman.Continuar();
-            else
-            walkman.Play();
+
+            walkman.AbrirFichero("C:/Users/jose_/Music/The Very Best of Yiruma   Piano Greatest Hits Full ALbum - from YouTube.mp3");
+            if (walkman.player.getStatus() == 1) {
+                walkman.Continuar();
+            } else {
+                walkman.Play();
+            }
         } catch (Exception e) {
         }
 
@@ -651,21 +661,22 @@ public class Usuario extends javax.swing.JFrame {
     private void jLabel22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel22MouseClicked
         // TODO add your handling code here:
         String[] objeto = new String[5];
-      String titulo =  tablaItems.getValueAt(tablaItems.getSelectedRow(),0).toString();
-      String artista = tablaItems.getValueAt(tablaItems.getSelectedRow(),1).toString();
-      String album = tablaItems.getValueAt(tablaItems.getSelectedRow(),2).toString();
-      String genero = tablaItems.getValueAt(tablaItems.getSelectedRow(),3).toString();
-      String anio =tablaItems.getValueAt(tablaItems.getSelectedRow(),4).toString();
-      
-      objeto[0] = titulo;
-      objeto[1]=artista;
-      objeto[2]= album;
-      objeto[3]= genero;
-      objeto[4]=anio;
-      DefaultTableModel modelo=(DefaultTableModel) jTable1.getModel(); 
-      modelo.addRow(objeto);
-      jTable1.setModel(modelo);
-      
+        String titulo = tablaItems.getValueAt(tablaItems.getSelectedRow(), 0).toString();
+        String artista = tablaItems.getValueAt(tablaItems.getSelectedRow(), 1).toString();
+        String album = tablaItems.getValueAt(tablaItems.getSelectedRow(), 2).toString();
+        String genero = tablaItems.getValueAt(tablaItems.getSelectedRow(), 3).toString();
+        String anio = tablaItems.getValueAt(tablaItems.getSelectedRow(), 4).toString();
+        String ruta = path[tablaItems.getSelectedRow()];
+        objeto[0] = titulo;
+        objeto[1] = artista;
+        objeto[2] = album;
+        objeto[3] = genero;
+        objeto[4] = anio;
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        modelo.addRow(objeto);
+        jTable1.setModel(modelo);
+        WService.insertarCola(titulo,ruta);
+
     }//GEN-LAST:event_jLabel22MouseClicked
 
     /**

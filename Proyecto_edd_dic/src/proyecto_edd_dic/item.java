@@ -10,14 +10,23 @@ package proyecto_edd_dic;
  * @author jose_
  */
 public class item {
-    String nombreCancion , Artista, album,genero,anio;
+    String nombreCancion , Artista, album,genero,anio,path;
 
-    public item(String nombreCancion, String Artista, String album,String genero ,String anio) {
+    public item(String nombreCancion, String Artista, String album,String genero ,String anio ,String path) {
         this.nombreCancion = nombreCancion;
         this.Artista = Artista;
         this.album = album;
         this.genero= genero;
         this.anio=anio;
+        this.path=path;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
     
      public String getGenero() {
